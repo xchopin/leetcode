@@ -1,3 +1,4 @@
+// 1 ms Beats 96.47%  Memory 45.17 MB Beats 91.38%
 class ConcatenationOfArray {
     public int[] getConcatenation(int[] nums) {
         int[] res = new int[nums.length * 2];

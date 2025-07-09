@@ -32,7 +32,9 @@ public class MaxProfit {
                 buy = sell;
             }
 
-            res = Math.max(res, prices[sell] - prices[buy]);
+            int profit = prices[sell] - prices[buy];
+
+            res = Math.max(res, profit);
 
             sell++;
         }

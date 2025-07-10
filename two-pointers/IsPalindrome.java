@@ -1,20 +1,54 @@
-// Could be more efficient without using a replaceAll and using a utility method to check if a char is alphanum but honestly it's more maintenable this way
+/** 
+Accepted
+486 / 486 testcases passed
+Xavier Chopin
+Xavier Chopin
+submitted at Jul 10, 2025 16:02
 
+Editorial
+
+Solution
+Runtime
+2
+ms
+Beats
+98.47%
+Analyze Complexity
+Memory
+43.14
+MB
+Beats
+69.90%
+
+*/
 class IsPalindrome {
     public boolean isPalindrome(String s) {
-        char[] chars = s.toLowerCase().replaceAll("[^A-Za-z0-9]", "").toCharArray();
+        s = s.toLowerCase();
+        int left = 0;
+        int right = s.length() - 1;
 
-        int start = 0;
-        int end = chars.length - 1;
 
-        while (start < end) {
-            if (chars[start] != chars[end]) {
+        while (left < right) {
+            while (left < right && isSpecialChar(s.charAt(right))) {
+                right--;
+            }
+
+            while (left < right && isSpecialChar(s.charAt(left))) {
+                left++;
+            }
+
+            if ((s.charAt(left) != s.charAt(right))) {
                 return false;
             }
-            start++;
-            end--;
+
+            left++;
+            right--;
         }
 
         return true;
+    }
+
+    private boolean isSpecialChar(char c) {
+        return !((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'));
     }
 }

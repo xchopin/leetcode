@@ -1,42 +1,55 @@
+/**
+Accepted
+100 / 100 testcases passed
+Xavier Chopin
+Xavier Chopin
+submitted at Jul 10, 2025 17:41
+
+Editorial
+
+Solution
+Runtime
+2
+ms
+Beats
+96.77%
+Analyze Complexity
+Memory
+41.60
+MB
+Beats
+92.17%
+*/
+
 class ValideParentheses {
     public boolean isValid(String s) {
-        Map<Character, Character> closingBrackets = Map.of(
-            ')', '(',
-            '}', '{',
-            ']', '['
-        );
+        Stack<Character> openedBrackets = new Stack<>();
 
-        Stack<Character> unclosed = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char current = s.charAt(i);
 
-        for (int i = 0 ; i < s.length(); i++) {
-            if (isCharBracket(s.charAt(i))) {
-                // if it's a closing bracket it should be the first element of the unclosed
-                if (closingBrackets.containsKey(s.charAt(i))) {
-                    // if the top element of the unclosed bracket is the right one, the brackets are closed we can remove it
-                    if (!unclosed.isEmpty() && unclosed.peek() == closingBrackets.get(s.charAt(i))) {
-                        unclosed.pop();
-                    } else {
-                        return false;
-                    }
-                } else {
-                    unclosed.add(s.charAt(i));
+            if (closeBracketChar(current)) {
+                if (openedBrackets.empty() || !matchBracket(openedBrackets.pop(), current)) {
+                    return false;
                 }
-
+            } else {
+                openedBrackets.push(current);
             }
         }
 
-        return unclosed.isEmpty();
+        return openedBrackets.empty();
+        
     }
 
-    private boolean isCharBracket(Character c) {
-        Set<Character> chars = new HashSet<>();
-        chars.add('(');
-        chars.add('{');
-        chars.add('[');
-        chars.add(')');
-        chars.add('}');
-        chars.add(']');
-
-        return chars.contains(c);
+    public boolean closeBracketChar(char c) {
+        return (c == ')' || c == '}' || c == ']');
     }
+
+
+    public boolean matchBracket(char open, char close) {
+        return open == '(' && close == ')' 
+               || open == '{' && close == '}'
+               || open == '[' && close == ']';
+    }
+
 }

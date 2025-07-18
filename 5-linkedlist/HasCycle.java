@@ -10,16 +10,15 @@ class HasCycle {
 
     public boolean hasCycle(ListNode head) {
         ListNode pointer = head;
-        ListNode fastPointer = head.next;
+        ListNode fastPointer = head;
 
         while (fastPointer != null && fastPointer.next != null) {
+            pointer = pointer.next;
+            fastPointer = fastPointer.next.next;
 
             if (pointer == fastPointer) {
                 return true;
             }
-
-            pointer = pointer.next;
-            fastPointer = fastPointer.next.next;
 
         }
         

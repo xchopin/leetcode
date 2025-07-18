@@ -9,19 +9,20 @@ class HasCycle {
     }
 
     public boolean hasCycle(ListNode head) {
-        ListNode cursor = head;
-        ListNode fastCursor = head;
+        ListNode pointer = head;
+        ListNode fastPointer = head.next;
 
-        while (fastCursor != null && fastCursor.next != null) {
-            cursor = cursor.next;
-            fastCursor = fastCursor.next.next;
+        while (fastPointer != null && fastPointer.next != null) {
 
-            if (cursor == fastCursor) {
+            if (pointer == fastPointer) {
                 return true;
             }
+
+            pointer = pointer.next;
+            fastPointer = fastPointer.next.next;
+
         }
-
-
+        
         return false;
     }
 

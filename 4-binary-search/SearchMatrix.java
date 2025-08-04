@@ -15,7 +15,7 @@ Memory
 Beats 91.81%
 **/
 
-class searchMatrix {
+class SearchMatrix {
     public boolean searchMatrix(int[][] matrix, int target) {
         int rows = matrix.length;
         int columns = matrix[0].length;

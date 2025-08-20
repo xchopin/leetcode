@@ -1,4 +1,22 @@
-// Runtime 0 ms Beats 100.00% - Memory 41.67 MB Beats 74.25%
+/**
+
+Accepted
+208 / 208 testcases passed
+Xavier Chopin
+Xavier Chopin
+submitted at Aug 20, 2025 16:40
+
+Editorial
+
+Solution
+Runtime
+0ms Beats 100.00% Analyze Complexity
+Memory
+41.68MB
+Beats
+76.12%
+
+*/
 
 /**
  * Definition for singly-linked list.
@@ -10,37 +28,41 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-
-class RemoveNthFromEnd {
+public class RemoveNthFromEnd {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        int length = 0;
-        ListNode current = head;
+        ListNode reversed = reverse(head);
+
+        if (n == 1) {
+            return reverse(reversed.next);
+        } 
+
+        int i = 1;
 
 
-        while (current != null) {
-            length++;
-            current = current.next;
-        }
-
-        
-        int nodeToRemove = (length - n);
-
-        if (nodeToRemove == 0) {
-            return head.next;
-        }
-
-        current = head;
-        int counter = 1;
-        while (current != null) {
-            if (nodeToRemove == counter) {
-                current.next = current.next.next;
-            } else {
-                current = current.next;
+        ListNode reversedHead = reversed;
+   
+        while (reversed != null && i != n) {
+            if (i == n - 1) {
+                reversed.next = reversed.next.next;
             }
-
-            counter++;
+            reversed = reversed.next;
+            i++;
         }
 
-        return head;
+        return reverse(reversedHead);
+    }
+
+    private ListNode reverse(ListNode head) {
+        ListNode current = head;
+        ListNode previous = null;
+
+        while (current != null) {
+            ListNode temp = current.next;
+            current.next = previous;
+            previous = current;
+            current = temp;
+        }
+
+        return previous;
     }
 }
